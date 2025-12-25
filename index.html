@@ -28,8 +28,10 @@
             box-sizing: border-box;
         }
         
-        html {
-            scroll-behavior: smooth;
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
         }
         
         body {
@@ -38,10 +40,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
             font-family: 'Poppins', sans-serif;
             color: var(--dark);
             padding: 20px;
+            position: relative;
+            overflow-y: auto;
         }
         
         .container {
@@ -50,6 +53,9 @@
             padding: 20px;
             position: relative;
             z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         header {
@@ -57,6 +63,7 @@
             margin-bottom: 30px;
             opacity: 0;
             animation: fadeInUp 1s forwards 0.3s;
+            width: 100%;
         }
         
         .title {
@@ -110,6 +117,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
             line-height: 1.5;
+            text-align: center;
         }
         
         .envelope-section {
@@ -525,10 +533,14 @@
         @media (max-width: 768px) {
             body {
                 padding: 15px;
+                overflow-y: auto;
+                height: auto;
+                min-height: 100vh;
             }
             
             .container {
                 padding: 10px;
+                height: auto;
             }
             
             .instruction {
@@ -557,6 +569,7 @@
         @media (max-width: 480px) {
             body {
                 padding: 10px;
+                overflow-y: auto;
             }
             
             .title {
@@ -645,35 +658,6 @@
             }
         }
         
-        /* Music toggle */
-        .music-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 55px;
-            height: 55px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: var(--shadow);
-            cursor: pointer;
-            z-index: 100;
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .music-toggle:hover {
-            transform: scale(1.1) rotate(15deg);
-        }
-        
-        .music-toggle i {
-            font-size: 22px;
-            color: var(--primary);
-        }
-        
         /* Scrollbar styling for modal */
         .modal-content::-webkit-scrollbar {
             width: 8px;
@@ -693,11 +677,6 @@
             background: var(--primary);
         }
         
-        /* Ensure body doesn't scroll when modal is open */
-        body.modal-open {
-            overflow: hidden;
-        }
-        
         /* Tablet adjustments */
         @media (min-width: 769px) and (max-width: 1024px) {
             .container {
@@ -714,6 +693,49 @@
             .container {
                 max-width: 1200px;
             }
+            
+            body {
+                padding: 40px 20px;
+            }
+        }
+        
+        /* Fix for body resizing */
+        body.modal-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Heart button for mobile */
+        .mobile-heart-btn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: var(--shadow);
+            z-index: 100;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .mobile-heart-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-heart-btn {
+                display: flex;
+            }
         }
     </style>
 </head>
@@ -722,9 +744,9 @@
     <div class="floating-hearts" id="floatingHearts"></div>
     <div class="floating-words" id="floatingWords"></div>
     
-    <!-- Music toggle -->
-    <div class="music-toggle" id="musicToggle">
-        <i class="fas fa-music"></i>
+    <!-- Mobile heart button -->
+    <div class="mobile-heart-btn" id="mobileHeartBtn">
+        <i class="fas fa-heart"></i>
     </div>
     
     <div class="container">
@@ -766,7 +788,40 @@
             </div>
             
             <div class="modal-content">
-                <p class="message-text">Badu galti ho gya abse kbhi nhi hoga maf bhi kar do n bat karo badu please badu 😭😭Hamko ye ending nhi chahiye tha badu please badu maf kar do 😭😭 aaj ke bad kbhi nhi hoga kbhi nhi ek galti nhi hoga badu tumko mumi papa ka no chahiye tha n Mera ham de denge tumko kyuki ham ab koi Galti nhi karenge badu sch me bs ek bar maf kar do badu pls 😭😭 tum shi bolti thi badu tum jb chli jaogi tb tumhara kimat pta chalega aur abhi hamko pta chl rha hai badu please maf kar do bs ek bar badu 😭😭</p>
+                <p class="message-text">
+                    My dearest love, I'm writing this with a heart full of regret and love. I know I've hurt you, and for that, I am truly and deeply sorry. You are the most important person in my life, and seeing you upset because of my actions breaks my heart.
+                </p>
+                
+                <p class="message-text">
+                    I want you to know that I recognize my mistake and take full responsibility for my actions. I was thoughtless and insensitive, and I failed to consider how my words/actions would affect you. This is not the partner I want to be for you.
+                </p>
+                
+                <ul class="apology-points">
+                    <li>I promise to be more attentive and considerate of your feelings</li>
+                    <li>I will communicate better and listen more carefully</li>
+                    <li>I will make more effort to understand your perspective</li>
+                    <li>I will work on being more patient and supportive</li>
+                    <li>I will show you every day how much you mean to me</li>
+                    <li>I will be more mindful of my words and their impact</li>
+                    <li>I will prioritize our relationship and make time for us</li>
+                    <li>I will respect your feelings and validate your emotions</li>
+                </ul>
+                
+                <p class="message-text">
+                    You deserve nothing but love, respect, and happiness. I am committed to being the partner who provides that for you every single day. Our relationship means everything to me, and I will do whatever it takes to make things right and rebuild the trust I've damaged.
+                </p>
+                
+                <p class="message-text">
+                    I understand that apologies need to be backed by actions, not just words. That's why I'm making these promises to you today. I want to grow with you, learn with you, and build a future where we both feel loved, respected, and valued.
+                </p>
+                
+                <p class="message-text">
+                    Please know that my love for you is stronger than any mistake I've made. You are my everything - my happiness, my inspiration, and my home. I'm willing to put in the work to become the person you deserve.
+                </p>
+                
+                <p class="message-text" style="font-style: italic; color: var(--primary);">
+                    I'm here, ready to listen, ready to change, and ready to love you better. Please give me a chance to make things right.
+                </p>
                 
                 <div class="modal-signature">
                     <div class="signature-name">With all my love</div>
@@ -776,12 +831,9 @@
         </div>
     </div>
 
-    <!-- Audio elements -->
+    <!-- Audio element for envelope open sound only -->
     <audio id="openSound" preload="auto">
         <source src="https://assets.mixkit.co/sfx/preview/mixkit-magic-sparkles-300.mp3" type="audio/mp3">
-    </audio>
-    <audio id="bgMusic" loop preload="auto">
-        <source src="https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3" type="audio/mp3">
     </audio>
 
     <script>
@@ -792,13 +844,11 @@
             const closeModal = document.getElementById('closeModal');
             const floatingHearts = document.getElementById('floatingHearts');
             const floatingWords = document.getElementById('floatingWords');
-            const musicToggle = document.getElementById('musicToggle');
+            const mobileHeartBtn = document.getElementById('mobileHeartBtn');
             const openSound = document.getElementById('openSound');
-            const bgMusic = document.getElementById('bgMusic');
             const body = document.body;
             
             let isOpen = false;
-            let musicEnabled = false;
             
             // Create floating hearts
             function createFloatingHearts(count) {
@@ -860,6 +910,7 @@
             // Envelope click handler
             envelope3d.addEventListener('click', openEnvelope);
             envelopeSeal.addEventListener('click', openEnvelope);
+            mobileHeartBtn.addEventListener('click', openEnvelope);
             
             function openEnvelope() {
                 if (!isOpen) {
@@ -868,6 +919,7 @@
                     
                     // Play sound
                     openSound.currentTime = 0;
+                    openSound.volume = 0.5;
                     openSound.play().catch(e => console.log("Audio play failed:", e));
                     
                     // Create sparkle effect
@@ -882,12 +934,6 @@
                         createFloatingHearts(15);
                         createFloatingWords(8);
                         
-                        // Start background music if enabled
-                        if (musicEnabled) {
-                            bgMusic.volume = 0.4;
-                            bgMusic.play().catch(e => console.log("Background music failed:", e));
-                        }
-                        
                         // Focus modal for accessibility
                         modalOverlay.focus();
                     }, 1000);
@@ -898,6 +944,9 @@
                         '<i class="fas fa-heart" style="margin-right: 10px; color: var(--primary);"></i>' +
                         'Thank you for opening my heart. Please read my message above.';
                     instruction.classList.remove('pulse-animation');
+                    
+                    // Hide mobile heart button
+                    mobileHeartBtn.style.display = 'none';
                 }
             }
             
@@ -912,7 +961,7 @@
                         sparkle.className = 'sparkle';
                         sparkle.style.left = `${centerX}px`;
                         sparkle.style.top = `${centerY}px`;
-                        body.appendChild(sparkle);
+                        document.body.appendChild(sparkle);
                         
                         // Animate sparkle
                         const angle = Math.random() * Math.PI * 2;
@@ -951,20 +1000,6 @@
                 body.classList.remove('modal-open');
             }
             
-            // Music toggle
-            musicToggle.addEventListener('click', function() {
-                musicEnabled = !musicEnabled;
-                
-                if (musicEnabled) {
-                    this.innerHTML = '<i class="fas fa-volume-up"></i>';
-                    bgMusic.volume = 0.4;
-                    bgMusic.play().catch(e => console.log("Audio play failed:", e));
-                } else {
-                    this.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                    bgMusic.pause();
-                }
-            });
-            
             // Create periodic floating elements
             setInterval(() => {
                 createFloatingHearts(2);
@@ -992,6 +1027,20 @@
                     e.preventDefault();
                 }
             }, { passive: false });
+            
+            // Fix for mobile viewport issues
+            function setViewportHeight() {
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+            
+            setViewportHeight();
+            window.addEventListener('resize', setViewportHeight);
+            
+            // Handle iOS Safari 100vh issue
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                document.body.style.minHeight = '-webkit-fill-available';
+            }
         });
     </script>
 </body>
